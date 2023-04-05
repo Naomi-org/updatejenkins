@@ -2,7 +2,7 @@ node {
     def app
 
     stage('Clone repository') {
-       git branch: 'main', credentialsId: 'dockerhubcred', url: 'https://github.com/Naomi-org/updatejenkins.git' //Clones Repo 
+       git branch: 'main', credentialsId: 'githubargo', url: 'https://github.com/Naomi-org/updatejenkins.git' //Clones Repo 
 
     
     }
