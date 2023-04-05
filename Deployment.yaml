@@ -4,6 +4,7 @@ metadata:
   namespace: test
   name: bush
 spec:
+replicas: 4
   selector:
     matchLabels:
       app: bushapp
