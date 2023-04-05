@@ -1,3 +1,4 @@
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -5,10 +6,10 @@ metadata:
   name: bushsvc
 spec:
   selector:
-  type: LoadBalancer
     app: bushapp
+  type: LoadBalancer
   ports:
-  - port: 80
+  - name: http
+    port: 80
     targetPort: 8080
     nodePort: 31000
-  
