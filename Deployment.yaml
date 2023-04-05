@@ -13,7 +13,7 @@ spec:
         app: bushapp
     spec:
       containers:
-        - name: TekangbushImage
+        - name: tekangbushImage
           image: tekangbushh/spring-boot-mongo-ja:61
           # resources:
           #   limits:
