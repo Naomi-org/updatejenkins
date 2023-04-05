@@ -5,7 +5,7 @@ metadata:
   name: bush
 spec:
   selector:
-  replica: 4
+  replicas: 4
     matchLabels:
       app: bushapp
   template:
