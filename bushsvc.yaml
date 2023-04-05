@@ -5,7 +5,9 @@ metadata:
   name: bushsvc
 spec:
   selector:
+  type: LoadBalancer
     app: bushapp
   ports:
   - port: 80
     targetPort: 8080
+    nodePort: 31000
