@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: dev
+  name: bush
+spec:
+  selector:
+    matchLabels:
+      app: bushapp
+  template:
+    metadata:
+      labels:
+        app: bushapp
+    spec:
+      containers:
+        - name: TekangbushImage
+          image: tekangbushh/spring-boot-mongo-ja:33
+          # resources:
+          #   limits:
+          #     memory: "128Mi"
+          #     cpu: "500m"
+          ports:
+            - containerPort: 8080

@@ -1,0 +1,38 @@
+node {
+    def app
+
+    stage('Clone repository') {
+       git branch: 'main', credentialsId: 'dockerhubcred', url: 'https://github.com/Naomi-org/updatejenkins.git' //Clones Repo 
+
+    
+    }
+
+    stage('Update GIT') {
+
+
+            script {
+                
+                    //  withCredentials([usernamePassword(credentialsId: 'GithubCred', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        //def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
+                        //I did not require the above two lines as i had passed credentials in clone stage 
+                        sh "git config user.email careeremt9@gmail.com"        //replace with your email for git
+                        sh "git config user.name Naomi-org"            //replace with ypur git username git
+                        sh "git switch main"                         //ensure we are working in main branch or any other branch required for this build 
+                        sh "cat Deployment.yaml"                     //not required just shows previous state of file before update 
+                        sh "sed -i 's+tekangbushh/spring-boot-mongo-ja.*+tekangbushh/spring-boot-mongo-ja:${DOCKERTAG}+g' Deployment.yaml" //sed command used to replace  dockertag in deploymentfie
+                        sh "cat Deployment.yaml"                  // shows state of file after update 
+                        sh "git add ."
+                        sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
+                        // sh "git push https://github.com/JoetechDev/Manifests.git"
+                         withCredentials([usernamePassword(credentialsId: 'dockerhubcred', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@https://github.com/Naomi-org/updatejenkins.git main"  // Pushes update to remote repo Dockerhub
+                          // sh "git push https://${GIT_USERNAME}@github.com/${GIT_USERNAME}/Manifests.git HEAD:main"
+                        // sh "git push https://${GIT_USERNAME}@github.com/JoetechDev/Manifests.git HEAD:main"
+                        // sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/JoetechDev/Manifests.git HEAD:main"
+                        //  sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/JoetechDev/Manifests.git"
+                          // sh "git push origin main"
+                        // ArgoCD job is triggered by change in the Deployment file , checks every 3 minutes except we add a webhook for auto checks and deployment 
+      }
+    }
+  }
+ }
