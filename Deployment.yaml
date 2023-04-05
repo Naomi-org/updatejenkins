@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: tekangbushImage
-          image: tekangbushh/spring-boot-mongo-ja:61
+          image: tekangbushh/spring-boot-mongo-ja:62
           # resources:
           #   limits:
           #     memory: "128Mi"
