@@ -2,14 +2,14 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: test
-  name: joetechingress
+  namespace: argocdd
+  name: bushingress
   labels:
-    name: joetechingress
+    name: bushingress
 spec:
   ingressClassName: nginx
   rules:
-  - host: josephaggrey.com
+  - host: enohrose.com
     http:
       paths:
       - pathType: Prefix
